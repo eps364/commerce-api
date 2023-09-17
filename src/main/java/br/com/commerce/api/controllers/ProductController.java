@@ -1,7 +1,6 @@
 package br.com.commerce.api.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,12 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.commerce.api.services.ProductService;
+import br.com.commerce.api.dto.Product.ProductRequest;
+import br.com.commerce.api.dto.Product.ProductResponse;
 import br.com.commerce.api.models.Product;
 
 @RestController
 @RequestMapping(value = { "/products" })
 public class ProductController {
-
 
 	@Autowired
 	ProductService productService;
@@ -26,21 +26,19 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id) {
-		Optional<Product> product = productService.findById(id);
-		return product.<ResponseEntity<Object>>map(value ->
-				ResponseEntity.status(HttpStatus.OK).body(value)).orElseGet(() ->
-				ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found."));
+	public ResponseEntity<ProductResponse> findById(@PathVariable(value = "id") Long id) {
+		ProductResponse product = productService.findById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(product);
 	}
 
 	@PostMapping
-	public ResponseEntity<Product> create(@RequestBody Product product) {
+	public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest product) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateProduct(@PathVariable(value="id") Long id,
-												@RequestBody Product product) {
+	public ResponseEntity<ProductResponse> updateProduct(@PathVariable(value="id") Long id,
+												@RequestBody ProductRequest product) {
 		return ResponseEntity.status(HttpStatus.OK).body(productService.update(product, id));
 	}
 

@@ -22,7 +22,7 @@ public class Product {
     private String description;
 
     @Column
-    private double price;
+    private Double price;
 
 
 
