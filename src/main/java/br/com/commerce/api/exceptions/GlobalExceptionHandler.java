@@ -15,45 +15,45 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            WebRequest request) {
-        ExceptionResponse errorResponse = new ExceptionResponse(
-                HttpStatus.UNPROCESSABLE_ENTITY.value(),
-                "Validation error. Check 'errors' field for details.");
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+        public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValid(
+                        MethodArgumentNotValidException ex,
+                        WebRequest request) {
+                ExceptionResponse errorResponse = new ExceptionResponse(
+                                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                                "Validation error. Check 'errors' field for details.");
 
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-            errorResponse.addValidationError(fieldError.getField(),
-                    fieldError.getDefaultMessage());
+                for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+                        errorResponse.addValidationError(fieldError.getField(),
+                                        fieldError.getDefaultMessage());
+                }
+
+                return ResponseEntity.unprocessableEntity().body(errorResponse);
         }
 
-        return ResponseEntity.unprocessableEntity().body(errorResponse);
-    }
+        @ExceptionHandler(NoSuchElementException.class)
+        @ResponseStatus(HttpStatus.NOT_FOUND)
+        public ResponseEntity<ExceptionResponse> handleNoSuchElementException(
+                        NoSuchElementException ex,
+                        WebRequest request) {
+                ExceptionResponse errorResponse = new ExceptionResponse(
+                                HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());
 
-    @ExceptionHandler(NoSuchElementException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ExceptionResponse> handleNoSuchElementException(
-        NoSuchElementException ex,
-            WebRequest request) {
-        ExceptionResponse errorResponse = new ExceptionResponse(
-                HttpStatus.UNPROCESSABLE_ENTITY.value(),ex.getMessage());
+                return ResponseEntity.unprocessableEntity().body(errorResponse);
+        }
 
-        return ResponseEntity.unprocessableEntity().body(errorResponse);
-    }
+        @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+        @ResponseStatus(HttpStatus.NOT_FOUND)
+        public ResponseEntity<ExceptionResponse> handleMethodArgumentTypeMismatchException(
+                        MethodArgumentTypeMismatchException ex,
+                        WebRequest request) {
+                ExceptionResponse errorResponse = new ExceptionResponse(
+                                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                                "Incompatible type in properties: " + ex.getPropertyName() + " - "
+                                                + ex.getCause().getMessage());
 
-    //MethodArgumentTypeMismatchException
-
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ExceptionResponse> handleMethodArgumentTypeMismatchException(
-        MethodArgumentTypeMismatchException ex,
-            WebRequest request) {
-        ExceptionResponse errorResponse = new ExceptionResponse(
-                HttpStatus.UNPROCESSABLE_ENTITY.value(),"Incompatible type in properties: " + ex.getPropertyName() + " - " + ex.getCause().getMessage());
-
-        return ResponseEntity.unprocessableEntity().body(errorResponse);
-    }
+                return ResponseEntity.unprocessableEntity().body(errorResponse);
+        }
 
 }

@@ -5,13 +5,12 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
 @AllArgsConstructor
 @Getter
 public enum OrderState {
-    ABANDONED(1,"ABANDONED"),
-    INCOMPLETE(2,"INCOMPLETE"),
-    COMPLETE(3,"COMPLETE");
+    ABANDONED(1, "ABANDONED"),
+    INCOMPLETE(2, "INCOMPLETE"),
+    COMPLETE(3, "COMPLETE");
 
     private Integer code;
     private String description;

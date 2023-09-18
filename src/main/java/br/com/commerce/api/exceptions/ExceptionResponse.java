@@ -28,8 +28,8 @@ public class ExceptionResponse {
     private final String message;
   }
 
-  public void addValidationError(String field, String message){
-    if(Objects.isNull(errors)){
+  public void addValidationError(String field, String message) {
+    if (Objects.isNull(errors)) {
       errors = new ArrayList<>();
     }
     errors.add(new ValidationError(field, message));
