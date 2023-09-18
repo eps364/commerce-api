@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.commerce.api.services.ProductService;
+import jakarta.validation.Valid;
 import br.com.commerce.api.dto.Product.ProductRequest;
 import br.com.commerce.api.dto.Product.ProductResponse;
 import br.com.commerce.api.models.Product;
@@ -32,13 +33,13 @@ public class ProductController {
 	}
 
 	@PostMapping
-	public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest product) {
+	public ResponseEntity<ProductResponse> create(@RequestBody @Valid ProductRequest product) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductResponse> updateProduct(@PathVariable(value="id") Long id,
-												@RequestBody ProductRequest product) {
+												@RequestBody @Valid ProductRequest product) {
 		return ResponseEntity.status(HttpStatus.OK).body(productService.update(product, id));
 	}
 
