@@ -21,8 +21,8 @@ public class ProductService {
     @Autowired
     ProductMapper productMapper;
 
-    public List<Product> findAllProducts() {
-        return productRepository.findAll();
+    public List<ProductResponse> findAllProducts() {
+        return productMapper.toListProductResponse(productRepository.findAll());
     }
 
     public ProductResponse findById(Long id) {
@@ -32,17 +32,14 @@ public class ProductService {
 
     public ProductResponse save(ProductRequest product) {
         Product product0 = productMapper.toProduct(product);
-        Product productSave = productRepository.save(product0);
-        return productMapper.toProductResponse(productSave);
-
+        return productMapper.toProductResponse(productRepository.save(product0));
     }
 
     public ProductResponse update(ProductRequest product, Long id) {
         Product produtUpdate = productMapper.toProduct(product);
         if (productRepository.findById(id).isPresent()) {
             produtUpdate.setId(id);
-            productRepository.save(produtUpdate);
-            return productMapper.toProductResponse(produtUpdate);
+            return productMapper.toProductResponse(productRepository.save(produtUpdate));
         }
         return null;
     }

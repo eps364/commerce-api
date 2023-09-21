@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.commerce.api.dto.Product.ProductRequest;
 import br.com.commerce.api.dto.Product.ProductResponse;
-import br.com.commerce.api.models.Product;
 import br.com.commerce.api.services.ProductService;
 import jakarta.validation.Valid;
 
@@ -28,9 +27,8 @@ public class ProductController {
 	ProductService productService;
 
 	@GetMapping
-	public ResponseEntity<List<Product>> findAll() {
-		List<Product> productList = productService.findAllProducts();
-		return ResponseEntity.ok(productList);
+	public ResponseEntity<List<ProductResponse>> findAll() {
+		return ResponseEntity.ok(productService.findAllProducts());
 	}
 
 	@GetMapping("/{id}")

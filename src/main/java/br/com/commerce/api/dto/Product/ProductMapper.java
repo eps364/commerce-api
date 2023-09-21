@@ -1,6 +1,8 @@
 package br.com.commerce.api.dto.Product;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +14,28 @@ import br.com.commerce.api.models.Product;
 public class ProductMapper {
 
     @Autowired
-    private ModelMapper modelMapper;
+    private ModelMapper mapper;
 
     public Product toProduct(ProductRequest product) {
-        return modelMapper.map(product, Product.class);
+        return mapper.map(product, Product.class);
     }
 
     public ProductRequest toProductRequest(Product product) {
-        return modelMapper.map(product, ProductRequest.class);
+        return mapper.map(product, ProductRequest.class);
     }
 
     public ProductResponse toProductResponse(Product optional) {
-        return modelMapper.map(optional, ProductResponse.class);
+        return mapper.map(optional, ProductResponse.class);
     }
 
     public ProductResponse toProductResponse(Optional<Product> optional) {
-        return modelMapper.map(optional, ProductResponse.class);
+        return mapper.map(optional, ProductResponse.class);
+    }
+
+    public List<ProductResponse> toListProductResponse(List<Product> listProduct) {
+        return listProduct.stream()
+                .map(this::toProductResponse)
+                .collect(Collectors.toList());
     }
 
 }
