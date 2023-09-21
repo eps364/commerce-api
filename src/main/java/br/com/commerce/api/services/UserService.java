@@ -1,30 +1,53 @@
 package br.com.commerce.api.services;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import br.com.commerce.api.dto.User.UserMapper;
 import br.com.commerce.api.dto.User.UserRequest;
+import br.com.commerce.api.dto.User.UserResponse;
+import br.com.commerce.api.models.User;
+import br.com.commerce.api.repositories.UserRepository;
 
 @Service
 public class UserService {
 
-    public void findAllUsers() {
-      // TODO document why this method is empty
-    };
+  @Autowired
+  UserRepository userRepository;
 
-    public void findById(Long id) {
-      // TODO document why this method is empty
-    };
+  @Autowired
+  UserMapper userMapper;
 
-    public void save(UserRequest product) {
-      // TODO document why this method is empty
+  public List<UserResponse> findAllUsers() {
+    return userMapper.toListUserResponse(userRepository.findAll());
+  };
+
+  public UserResponse findById(UUID id) {
+    return userMapper.toUserResponse(userRepository.findById(id));
+  };
+
+  public UserResponse save(UserRequest user2) {
+    User user = userMapper.toUser(user2);
+    return userMapper.toUserResponse(userRepository.save(user));
+  }
+
+  public UserResponse update(UserRequest user, UUID id) {
+    User userUpdate = userMapper.toUser(user);
+    if (userRepository.findById(id).isPresent()) {
+      userUpdate.setId(id);
+      return userMapper.toUserResponse(userRepository.save(userUpdate));
     }
+    return null;
+  }
 
-    public void update(UserRequest product, Long id) {
-        // TODO document why this method is empty
+  public void delete(UUID id) {
+    if(userRepository.findById(id).isPresent()){
+      userRepository.deleteById(id);
     }
-
-    public void delete(Long id) {
-        // TODO document why this method is empty
-    }
+  }
 
 }
