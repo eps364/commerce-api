@@ -34,6 +34,10 @@ public class UserService {
     return this.findById(UUID.fromString(id));
   }
 
+  public User findByUserId(String id) {
+    return userMapper.toUser(this.findById(UUID.fromString(id)));
+  }
+
   @Transactional
   public UserResponse save(UserRequest user2) {
     User user = userMapper.toUser(user2);

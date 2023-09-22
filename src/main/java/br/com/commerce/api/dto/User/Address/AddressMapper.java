@@ -25,12 +25,12 @@ public class AddressMapper {
         return mapper.map(address, AddressRequest.class);
     }
 
-    public AddressResponse toAddressResponse(Address optional) {
-        return mapper.map(optional, AddressResponse.class);
+    public AddressResponse toAddressResponse(Address address) {
+        return mapper.map(address, AddressResponse.class);
     }
 
-    public AddressResponse toAddressResponse(Optional<Address> optional) {
-        return mapper.map(optional, AddressResponse.class);
+    public AddressResponse toAddressResponse(Optional<Address> address) {
+        return mapper.map(address, AddressResponse.class);
     }
 
     public List<AddressResponse> toListAddressResponse(List<Address> listAddress) {
