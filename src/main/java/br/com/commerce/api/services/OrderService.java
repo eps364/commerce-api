@@ -41,6 +41,11 @@ public class OrderService {
         return orderMapper.toOrderResponse(orderRepository.findById(id));
     }
 
+    public List<OrderResponse> findByUser(String id) {
+        User user = userService.findByUserId(id);
+        return orderMapper.toListOrderResponse(orderRepository.findByUser(user));
+    }
+
     @Transactional
     public OrderResponse save(OrderRequest order) {
         UserResponse userResponse = userService.findById(UUID.fromString(order.getUser()));
