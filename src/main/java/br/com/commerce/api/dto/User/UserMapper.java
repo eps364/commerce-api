@@ -20,6 +20,10 @@ public class UserMapper {
         return mapper.map(user, User.class);
     }
 
+    public User toUser(UserResponse user) {
+        return mapper.map(user, User.class);
+    }
+
     public UserRequest toUserRequest(User user) {
         return mapper.map(user, UserRequest.class);
     }

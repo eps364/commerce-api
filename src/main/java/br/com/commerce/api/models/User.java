@@ -1,12 +1,14 @@
 package br.com.commerce.api.models;
 
 import java.util.UUID;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,8 +41,6 @@ public class User {
     @Column
     private String document;
 
-    // TODO add Address in User
-    // @ManyToMany
-    // @JoinColumn(name = "id")
-    // private Address address;
+    @OneToMany(mappedBy = "user") 
+    private List<Address> address;
 }

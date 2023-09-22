@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.commerce.api.dto.User.UserMapper;
 import br.com.commerce.api.dto.User.UserRequest;
@@ -24,11 +23,15 @@ public class UserService {
 
   public List<UserResponse> findAllUsers() {
     return userMapper.toListUserResponse(userRepository.findAll());
-  };
+  }
 
   public UserResponse findById(UUID id) {
     return userMapper.toUserResponse(userRepository.findById(id));
-  };
+  }
+
+  public UserResponse findById(String id) {
+    return this.findById(UUID.fromString(id));
+  }
 
   public UserResponse save(UserRequest user2) {
     User user = userMapper.toUser(user2);
