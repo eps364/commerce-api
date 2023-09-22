@@ -11,6 +11,7 @@ import br.com.commerce.api.dto.Product.ProductRequest;
 import br.com.commerce.api.dto.Product.ProductResponse;
 import br.com.commerce.api.models.Product;
 import br.com.commerce.api.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProductService {
@@ -30,11 +31,13 @@ public class ProductService {
                 () -> new NoSuchElementException("Product not found id: " + id)));
     }
 
+    @Transactional
     public ProductResponse save(ProductRequest product) {
         Product product0 = productMapper.toProduct(product);
         return productMapper.toProductResponse(productRepository.save(product0));
     }
 
+    @Transactional
     public ProductResponse update(ProductRequest product, Long id) {
         Product produtUpdate = productMapper.toProduct(product);
         if (productRepository.findById(id).isPresent()) {
@@ -44,6 +47,7 @@ public class ProductService {
         return null;
     }
 
+    @Transactional
     public void delete(Long id) {
         if (productRepository.findById(id).isPresent()) {
             productRepository.deleteById(id);

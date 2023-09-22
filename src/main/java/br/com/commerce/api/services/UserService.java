@@ -11,6 +11,7 @@ import br.com.commerce.api.dto.User.UserRequest;
 import br.com.commerce.api.dto.User.UserResponse;
 import br.com.commerce.api.models.User;
 import br.com.commerce.api.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -33,11 +34,13 @@ public class UserService {
     return this.findById(UUID.fromString(id));
   }
 
+  @Transactional
   public UserResponse save(UserRequest user2) {
     User user = userMapper.toUser(user2);
     return userMapper.toUserResponse(userRepository.save(user));
   }
 
+  @Transactional
   public UserResponse update(UserRequest user, UUID id) {
     User userUpdate = userMapper.toUser(user);
     if (userRepository.findById(id).isPresent()) {
@@ -47,6 +50,7 @@ public class UserService {
     return null;
   }
 
+  @Transactional
   public void delete(UUID id) {
     if(userRepository.findById(id).isPresent()){
       userRepository.deleteById(id);

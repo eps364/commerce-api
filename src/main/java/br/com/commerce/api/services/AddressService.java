@@ -14,6 +14,7 @@ import br.com.commerce.api.dto.User.Address.AddressResponse;
 import br.com.commerce.api.models.Address;
 import br.com.commerce.api.models.User;
 import br.com.commerce.api.repositories.AddressRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class AddressService {
@@ -38,6 +39,7 @@ public class AddressService {
     return addressMapper.toAddressResponse(addressRepository.findById(id));
   }
 
+  @Transactional
   public AddressResponse save(AddressRequest address) {
     UserResponse userResponse = userService.findById(UUID.fromString(address.getUser()));
     if (userResponse != null) {
@@ -50,6 +52,7 @@ public class AddressService {
 
   }
 
+  @Transactional
   public AddressResponse update(AddressRequest address, Long id) {
     Address addressUpdate = addressMapper.toAddress(address);
     if (addressRepository.findById(id).isPresent()) {
@@ -59,6 +62,7 @@ public class AddressService {
     return null;
   }
 
+  @Transactional
   public void delete(Long id) {
     if (addressRepository.findById(id).isPresent()) {
       addressRepository.deleteById(id);
