@@ -1,4 +1,4 @@
-package br.com.commerce.api.dto.User.Address;
+package br.com.commerce.api.dto.user.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -6,9 +6,9 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.commerce.api.dto.Product.ProductMapper;
-import br.com.commerce.api.dto.Product.ProductRequest;
-import br.com.commerce.api.dto.Product.ProductResponse;
+import br.com.commerce.api.dto.product.ProductMapper;
+import br.com.commerce.api.dto.product.ProductRequest;
+import br.com.commerce.api.dto.product.ProductResponse;
 import br.com.commerce.api.models.Product;
 import br.com.commerce.api.repositories.ProductRepository;
 import jakarta.transaction.Transactional;

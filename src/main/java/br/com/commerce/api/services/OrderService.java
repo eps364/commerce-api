@@ -7,11 +7,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.commerce.api.dto.Order.OrderMapper;
-import br.com.commerce.api.dto.Order.OrderRequest;
-import br.com.commerce.api.dto.Order.OrderResponse;
-import br.com.commerce.api.dto.User.UserMapper;
-import br.com.commerce.api.dto.User.UserResponse;
+import br.com.commerce.api.dto.order.OrderMapper;
+import br.com.commerce.api.dto.order.OrderRequest;
+import br.com.commerce.api.dto.order.OrderResponse;
+import br.com.commerce.api.dto.user.UserMapper;
+import br.com.commerce.api.dto.user.UserResponse;
 import br.com.commerce.api.models.Order;
 import br.com.commerce.api.models.OrderState;
 import br.com.commerce.api.models.User;

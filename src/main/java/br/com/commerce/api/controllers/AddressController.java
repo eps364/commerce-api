@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.commerce.api.dto.User.Address.AddressRequest;
-import br.com.commerce.api.dto.User.Address.AddressResponse;
+import br.com.commerce.api.dto.user.address.AddressRequest;
+import br.com.commerce.api.dto.user.address.AddressResponse;
 import br.com.commerce.api.services.AddressService;
 import jakarta.validation.Valid;
 

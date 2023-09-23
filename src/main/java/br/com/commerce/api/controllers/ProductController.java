@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.commerce.api.dto.Product.ProductRequest;
-import br.com.commerce.api.dto.Product.ProductResponse;
+import br.com.commerce.api.dto.product.ProductRequest;
+import br.com.commerce.api.dto.product.ProductResponse;
 import br.com.commerce.api.services.ProductService;
 import jakarta.validation.Valid;
 
@@ -32,7 +32,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ProductResponse> findById(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<ProductResponse> findById(@PathVariable Long id) {
 		ProductResponse product = productService.findById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(product);
 	}
@@ -43,13 +43,13 @@ public class ProductController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ProductResponse> updateProduct(@PathVariable(value = "id") Long id,
+	public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id,
 			@RequestBody @Valid ProductRequest product) {
 		return ResponseEntity.status(HttpStatus.OK).body(productService.update(product, id));
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteProduct(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
 		productService.delete(id);
 		return ResponseEntity.noContent().build();
 	}

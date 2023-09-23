@@ -1,4 +1,4 @@
-package br.com.commerce.api.dto.Product;
+package br.com.commerce.api.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponse {
+public class OrderItemRequest {
+
     private Long id;
-    private String description;
-    private Double price;
+    private Long order;
+    private Long product;
+    private double price;
+    private int quantity;
 
 }

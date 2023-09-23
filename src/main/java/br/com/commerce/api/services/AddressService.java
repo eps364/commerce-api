@@ -6,11 +6,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.commerce.api.dto.User.UserMapper;
-import br.com.commerce.api.dto.User.UserResponse;
-import br.com.commerce.api.dto.User.Address.AddressMapper;
-import br.com.commerce.api.dto.User.Address.AddressRequest;
-import br.com.commerce.api.dto.User.Address.AddressResponse;
+import br.com.commerce.api.dto.user.UserMapper;
+import br.com.commerce.api.dto.user.UserResponse;
+import br.com.commerce.api.dto.user.address.AddressMapper;
+import br.com.commerce.api.dto.user.address.AddressRequest;
+import br.com.commerce.api.dto.user.address.AddressResponse;
 import br.com.commerce.api.models.Address;
 import br.com.commerce.api.models.User;
 import br.com.commerce.api.repositories.AddressRepository;

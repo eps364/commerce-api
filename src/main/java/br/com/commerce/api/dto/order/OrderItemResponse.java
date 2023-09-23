@@ -1,4 +1,4 @@
-package br.com.commerce.api.dto.Order;
+package br.com.commerce.api.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

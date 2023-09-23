@@ -1,9 +1,9 @@
-package br.com.commerce.api.dto.Order;
+package br.com.commerce.api.dto.order;
 
 import java.time.Instant;
 import java.util.List;
 
-import br.com.commerce.api.dto.User.UserResponse;
+import br.com.commerce.api.dto.user.UserResponse;
 import br.com.commerce.api.models.OrderItem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

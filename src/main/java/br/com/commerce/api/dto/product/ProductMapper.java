@@ -1,9 +1,7 @@
-package br.com.commerce.api.dto.Product;
+package br.com.commerce.api.dto.product;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +33,7 @@ public class ProductMapper {
     public List<ProductResponse> toListProductResponse(List<Product> listProduct) {
         return listProduct.stream()
                 .map(this::toProductResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

@@ -1,8 +1,8 @@
-package br.com.commerce.api.dto.User;
+package br.com.commerce.api.dto.user;
 
 import java.util.UUID;
 
-import br.com.commerce.api.dto.User.Address.AddressResponse;
+import br.com.commerce.api.dto.user.address.AddressResponse;
 
 import java.util.List;
 

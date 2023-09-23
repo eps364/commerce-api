@@ -1,9 +1,7 @@
-package br.com.commerce.api.dto.Order;
+package br.com.commerce.api.dto.order;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,6 +37,6 @@ public class OrderMapper {
     public List<OrderResponse> toListOrderResponse(List<Order> listOrder) {
         return listOrder.stream()
                 .map(this::toOrderResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 }
