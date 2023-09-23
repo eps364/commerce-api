@@ -4,10 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.commerce.api.dto.order.OrderItemRequest;
-import br.com.commerce.api.dto.order.OrderItemResponse;
-import br.com.commerce.api.dto.order.OrderItemsMapper;
 import br.com.commerce.api.dto.order.OrderMapper;
+import br.com.commerce.api.dto.order.orderitem.OrderItemRequest;
+import br.com.commerce.api.dto.order.orderitem.OrderItemResponse;
+import br.com.commerce.api.dto.order.orderitem.OrderItemsMapper;
 import br.com.commerce.api.models.Order;
 import br.com.commerce.api.models.OrderItem;
 import br.com.commerce.api.repositories.OrderItemRepository;

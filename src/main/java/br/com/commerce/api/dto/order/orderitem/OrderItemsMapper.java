@@ -1,4 +1,4 @@
-package br.com.commerce.api.dto.order;
+package br.com.commerce.api.dto.order.orderitem;
 
 import java.util.List;
 import java.util.Optional;
