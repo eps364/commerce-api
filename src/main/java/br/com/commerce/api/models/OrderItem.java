@@ -1,6 +1,8 @@
 package br.com.commerce.api.models;
 
 
+import java.time.Instant;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,4 +38,13 @@ public class OrderItem {
 
     @Column(name = "quantity")
     private int quantity;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_update")
+    private Instant dateUpdate;
+
+    @PreUpdate
+    public void preUpdate() {
+        this.dateUpdate = Instant.now();
+    }
 }
