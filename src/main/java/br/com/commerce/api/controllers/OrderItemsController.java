@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.commerce.api.dto.order.orderitem.OrderItemRequest;
 import br.com.commerce.api.dto.order.orderitem.OrderItemRequestPut;
 import br.com.commerce.api.dto.order.orderitem.OrderItemResponse;
-import br.com.commerce.api.dto.product.ProductResponse;
 import br.com.commerce.api.services.OrderItemsService;
 import jakarta.validation.Valid;
 
