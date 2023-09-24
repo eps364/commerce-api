@@ -17,7 +17,7 @@ import br.com.commerce.api.dto.order.OrderResponse;
 import br.com.commerce.api.services.OrderService;
 
 @RestController
-@RequestMapping(value = { "/orders" })
+@RequestMapping(value = { "orders" })
 public class OrderController {
 
     @Autowired
@@ -25,17 +25,12 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<List<OrderResponse>> findAll() {
-        return ResponseEntity.ok(orderService.findAllOrders());
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.findAllOrders());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<OrderResponse> findById(@PathVariable Long id){
-        return ResponseEntity.ok(orderService.findById(id));
-    }
-
-    @GetMapping("/user/{id}")
-    public ResponseEntity<List<OrderResponse>> findByUserId(@PathVariable String id){
-        return ResponseEntity.ok(orderService.findByUser(id));
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.findById(id));
     }
 
     @PostMapping
