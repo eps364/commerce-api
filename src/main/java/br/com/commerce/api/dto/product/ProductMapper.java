@@ -18,6 +18,10 @@ public class ProductMapper {
         return mapper.map(product, Product.class);
     }
 
+    public Product toProduct(ProductResponse product) {
+        return mapper.map(product, Product.class);
+    }
+
     public ProductRequest toProductRequest(Product product) {
         return mapper.map(product, ProductRequest.class);
     }

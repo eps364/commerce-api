@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.commerce.api.dto.order.orderitem.OrderItemRequest;
+import br.com.commerce.api.dto.order.orderitem.OrderItemRequestPut;
 import br.com.commerce.api.dto.order.orderitem.OrderItemResponse;
+import br.com.commerce.api.dto.product.ProductResponse;
 import br.com.commerce.api.services.OrderItemsService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(value = { "/order/items" })
+@RequestMapping(value = { "items" })
 public class OrderItemsController {
 
     @Autowired
@@ -37,27 +39,27 @@ public class OrderItemsController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     public ResponseEntity<OrderItemResponse> update(
-            @RequestBody @Valid OrderItemRequest item,
+            @RequestBody @Valid OrderItemRequestPut item,
             @PathVariable Long id) {
-        service.updateOrderItems(item, id);
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateOrderItems(item, id));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<OrderItemResponse> getById(Long id) {
-        return ResponseEntity.ok().body(service.findById(id));
+    public ResponseEntity<OrderItemResponse> getById(@PathVariable Long id) {
+        OrderItemResponse orderItemResponse = service.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(orderItemResponse);
     }
 
     @GetMapping
     public ResponseEntity<List<OrderItemResponse>> getAll() {
-         return ResponseEntity.ok().body(service.findAllOrderItems());
+         return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrderItems());
     }
 
-    @GetMapping("{orderId}")
+    @GetMapping("order/{orderId}")
     public ResponseEntity<List<OrderItemResponse>> getByOrderId(@PathVariable Long orderId) {
-        return ResponseEntity.ok().body(service.findAllOrderItemsByOrderId(orderId));
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrderItemsByOrderId(orderId));
     }
 
 }

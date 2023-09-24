@@ -22,6 +22,10 @@ public class OrderMapper {
         return mapper.map(order, Order.class);
     }
 
+    public Order toOrder(Optional<Order> order) {
+        return mapper.map(order, Order.class);
+    }
+
     public OrderRequest toOrderRequest(Order order) {
         return mapper.map(order, OrderRequest.class);
     }
