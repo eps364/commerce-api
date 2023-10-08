@@ -41,6 +41,7 @@ Aplicação de integração usando Spring Boot
 * Cucumber
 * JUnit
 * OpenAPI (Swagger)
+* Spring Actuator
 
 ## Deploy
 
@@ -50,6 +51,7 @@ Aplicação de integração usando Spring Boot
 
 - /swagger-ui/index.html
 - /api-docs
+- /actuator
 
 ### Referencias
 
