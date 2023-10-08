@@ -17,7 +17,7 @@ Aplicação de integração usando Spring Boot
 ## Requisitos Técnicos:
 
 - [ ] Utilizar spring security para fazer autenticação das APIS Rest
-- [ ] Utilizar o spring admin para monitorar a aplicação
+- [X] Utilizar o spring admin para monitorar a aplicação
 - [ ] Utilizar o rabbitmq como fila de mensageria
 - [X] Utilizar o banco mysql/postgres (via HikariCP ou JPA/HIBERNATE)
 - [ ] Utilizar o spring scheduled
