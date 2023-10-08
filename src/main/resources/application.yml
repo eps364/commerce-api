@@ -17,10 +17,10 @@ spring:
   profiles:
     active: dev
 
-springdoc:
-  version: '@springdoc.version@'
-  swagger-ui:
-    use-root-path: false
-    path: /swagger-ui.html
-    config-url: /v3/api-docs
-    enabled: true
+# springdoc:
+#   version: '@springdoc.version@'
+#   swagger-ui:
+#     use-root-path: false
+#     path: /swagger-ui.html
+#     config-url: /api-docs
+#     enabled: true
