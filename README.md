@@ -40,6 +40,7 @@ Aplicação de integração usando Spring Boot
 * Custon Messages Errors
 * Cucumber
 * JUnit
+* OpenAPI (Swagger)
 
 ## Deploy
 
@@ -48,3 +49,5 @@ Aplicação de integração usando Spring Boot
 [Host Staging](https://commerce-api-staging.up.railway.app)
 
 - /swagger-ui/index.html
+
+- /api-docs
