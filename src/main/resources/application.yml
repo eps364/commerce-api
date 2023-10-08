@@ -1,0 +1,26 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  application:
+    name: commerce-api
+    description: Aplicação de integração usando Spring Boot
+    author: Emerson Pereira da Silva
+    version: "@project.version@"
+spring:
+  profiles:
+    active: dev
+
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    use-root-path: false
+    path: /swagger-ui.html
+    config-url: /v3/api-docs
+    enabled: true
