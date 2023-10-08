@@ -1,4 +1,4 @@
-# API e-commerce
+### API e-commerce
 
 Aplicação de integração usando Spring Boot
 
@@ -19,13 +19,13 @@ Aplicação de integração usando Spring Boot
 - [ ] Utilizar spring security para fazer autenticação das APIS Rest
 - [ ] Utilizar o spring admin para monitorar a aplicação
 - [ ] Utilizar o rabbitmq como fila de mensageria
-- [ ] Utilizar o banco mysql (via HikariCP ou JPA/HIBERNATE)
+- [X] Utilizar o banco mysql/postgres (via HikariCP ou JPA/HIBERNATE)
 - [ ] Utilizar o spring scheduled
-- [ ] Utilizar o spring envs (local, hml, prd)
+- [X] Utilizar o spring envs (local, hml, prd)
 - [ ] Utilizar o junit para realizar testes unitários
 - [ ] Utilizar o slf4j + slf4j.MDC para loggs da aplicação (infos, debugs e errors)
 - [ ] Utilizar o redis cache para cache de informações
-- [ ] Utilizar um client HTTP REST + JSON
+- [X] Utilizar um client HTTP REST + JSON
 - [X] Utilizar maven para build da aplicação
 - [X] Utilizar o lombok + builder
 
@@ -41,6 +41,7 @@ Aplicação de integração usando Spring Boot
 * Cucumber
 * JUnit
 * OpenAPI (Swagger)
+* Spring Actuator
 
 ## Deploy
 
@@ -49,5 +50,9 @@ Aplicação de integração usando Spring Boot
 [Host Staging](https://commerce-api-staging.up.railway.app)
 
 - /swagger-ui/index.html
-
 - /api-docs
+- /actuator
+
+### Referencias
+
+- Hospedado em: (https://railway.app?referralCode=tPS5tO)

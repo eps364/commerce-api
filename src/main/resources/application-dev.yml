@@ -7,3 +7,10 @@ spring:
   sql:
     init:
       mode: always
+
+#/actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

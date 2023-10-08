@@ -1,18 +1,23 @@
+#/actuator
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: "health,startup,shutdown"
+        exclude: "env,beans"
   info:
     env:
-      enabled: true
+        enabled: true
+
 
 info:
   application:
     name: commerce-api
     description: Aplicação de integração usando Spring Boot
     author: Emerson Pereira da Silva
+    repository: https://github.com/eps364/commerce-api
     version: "@project.version@"
+    
 spring:
   profiles:
     active: dev
