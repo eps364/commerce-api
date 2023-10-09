@@ -9,10 +9,9 @@ management:
     env:
         enabled: true
 
-  spring:
-    profiles:
-      active: dev
-
+spring:
+  profiles:
+    active: dev
 
 info:
   application:
@@ -21,10 +20,6 @@ info:
     author: Emerson Pereira da Silva
     repository: https://github.com/eps364/commerce-api
     version: "@project.version@"
-    
-spring:
-  profiles:
-    active: dev
 
 # springdoc:
 #   version: '@springdoc.version@'
