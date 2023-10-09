@@ -19,7 +19,9 @@ import br.com.commerce.api.dto.order.orderitem.OrderItemRequestPut;
 import br.com.commerce.api.dto.order.orderitem.OrderItemResponse;
 import br.com.commerce.api.services.OrderItemsService;
 import jakarta.validation.Valid;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping(value = { "items" })
 public class OrderItemsController {
@@ -29,12 +31,14 @@ public class OrderItemsController {
 
     @PostMapping
     public ResponseEntity<OrderItemResponse> add(@RequestBody @Valid OrderItemRequest item) {
+        log.info(this.getClass().getName() + " | " + "create: " + item.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(item));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Object> remove(@PathVariable Long id) {
         service.deleteOrderItems(id);
+        log.info(this.getClass().getName() + " | " + "delete: " + id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
@@ -42,22 +46,26 @@ public class OrderItemsController {
     public ResponseEntity<OrderItemResponse> update(
             @RequestBody @Valid OrderItemRequestPut item,
             @PathVariable Long id) {
+        log.info(this.getClass().getName() + " | " + "update: " + id + item.toString());
         return ResponseEntity.status(HttpStatus.OK).body(service.updateOrderItems(item, id));
     }
 
     @GetMapping("{id}")
     public ResponseEntity<OrderItemResponse> getById(@PathVariable Long id) {
         OrderItemResponse orderItemResponse = service.findById(id);
+        log.info(this.getClass().getName() + " | " + "getById: " + id);
         return ResponseEntity.status(HttpStatus.OK).body(orderItemResponse);
     }
 
     @GetMapping
     public ResponseEntity<List<OrderItemResponse>> getAll() {
-         return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrderItems());
+        log.info(this.getClass().getName() + " | " + "getAll");
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrderItems());
     }
 
     @GetMapping("order/{orderId}")
     public ResponseEntity<List<OrderItemResponse>> getByOrderId(@PathVariable Long orderId) {
+        log.info(this.getClass().getName() + " | " + "getByOrderId: " + orderId);
         return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrderItemsByOrderId(orderId));
     }
 

@@ -18,7 +18,9 @@ import br.com.commerce.api.dto.product.ProductRequest;
 import br.com.commerce.api.dto.product.ProductResponse;
 import br.com.commerce.api.services.ProductService;
 import jakarta.validation.Valid;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping(value = { "/products" })
 public class ProductController {
@@ -28,29 +30,34 @@ public class ProductController {
 
 	@GetMapping
 	public ResponseEntity<List<ProductResponse>> findAll() {
+		log.info(this.getClass().getName() + " | " + "findAll");
 		return ResponseEntity.ok(productService.findAllProducts());
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductResponse> findById(@PathVariable Long id) {
 		ProductResponse product = productService.findById(id);
+		log.info(this.getClass().getName() + " | " + "findById: " + id);
 		return ResponseEntity.status(HttpStatus.OK).body(product);
 	}
 
 	@PostMapping
 	public ResponseEntity<ProductResponse> create(@RequestBody @Valid ProductRequest product) {
+		log.info(this.getClass().getName() + " | " + "create: " + product.toString());
 		return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id,
 			@RequestBody @Valid ProductRequest product) {
+				log.info(this.getClass().getName() + " | " + "update: " + id + product.toString());
 		return ResponseEntity.status(HttpStatus.OK).body(productService.update(product, id));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
 		productService.delete(id);
+		log.info(this.getClass().getName() + " | " + "delete: " + id);
 		return ResponseEntity.noContent().build();
 	}
 

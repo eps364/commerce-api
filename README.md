@@ -17,13 +17,13 @@ Aplicação de integração usando Spring Boot
 ## Requisitos Técnicos:
 
 - [ ] Utilizar spring security para fazer autenticação das APIS Rest
-- [ ] Utilizar o spring admin para monitorar a aplicação
+- [X] Utilizar o spring admin para monitorar a aplicação
 - [ ] Utilizar o rabbitmq como fila de mensageria
 - [X] Utilizar o banco mysql/postgres (via HikariCP ou JPA/HIBERNATE)
 - [ ] Utilizar o spring scheduled
 - [X] Utilizar o spring envs (local, hml, prd)
 - [ ] Utilizar o junit para realizar testes unitários
-- [ ] Utilizar o slf4j + slf4j.MDC para loggs da aplicação (infos, debugs e errors)
+- [X] Utilizar o slf4j + slf4j.MDC para loggs da aplicação (infos, debugs e errors)
 - [ ] Utilizar o redis cache para cache de informações
 - [X] Utilizar um client HTTP REST + JSON
 - [X] Utilizar maven para build da aplicação
@@ -42,6 +42,7 @@ Aplicação de integração usando Spring Boot
 * JUnit
 * OpenAPI (Swagger)
 * Spring Actuator
+* Log4J2
 
 ## Deploy
 

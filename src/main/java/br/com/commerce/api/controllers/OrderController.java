@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.commerce.api.dto.order.OrderRequest;
 import br.com.commerce.api.dto.order.OrderResponse;
 import br.com.commerce.api.services.OrderService;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping(value = { "orders" })
 public class OrderController {
@@ -25,16 +27,19 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<List<OrderResponse>> findAll() {
+        log.info(this.getClass().getName() + " | " + "findAll");
         return ResponseEntity.status(HttpStatus.OK).body(orderService.findAllOrders());
     }
 
     @GetMapping("{id}")
     public ResponseEntity<OrderResponse> findById(@PathVariable Long id){
+        log.info(this.getClass().getName() + " | " + "findById: " + id);
         return ResponseEntity.status(HttpStatus.OK).body(orderService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<OrderResponse> create(@RequestBody OrderRequest order) {
+        log.info(this.getClass().getName() + " | " + "create: " + order.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(order));
     }
 

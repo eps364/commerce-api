@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestControllerAdvice
 public class HandlerMethodArgumentTypeMismatchException {
 
@@ -21,7 +23,7 @@ public class HandlerMethodArgumentTypeMismatchException {
                 HttpStatus.UNPROCESSABLE_ENTITY.value(),
                 "Incompatible type in properties: " + ex.getPropertyName() + " - "
                         + ex.getCause().getMessage());
-
+        log.error(errorResponse.getMessage());
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
