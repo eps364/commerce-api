@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 public class HandleHttpRequestMethodNotSupportedException extends GlobalExceptionHandler {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -19,7 +22,7 @@ public class HandleHttpRequestMethodNotSupportedException extends GlobalExceptio
                 "MethodNotSupportedException type in properties:  - "
                         + ex.getCause().getMessage());
 
-        
+        log.error(errorResponse.getMessage());
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 

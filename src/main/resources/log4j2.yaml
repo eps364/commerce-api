@@ -1,0 +1,18 @@
+configuration:
+  status: debug
+  Properties:
+    Property:
+      - name: consolePatternLayout
+        value: "%highlight{%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=blue, DEBUG=green, TRACE=white}"
+  appenders:
+    Console:
+      name: ConsoleAppender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: ${consolePatternLayout}
+
+  loggers:
+    root:
+      level: info
+      AppenderRef:
+        ref: ConsoleAppender

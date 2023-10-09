@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestControllerAdvice
 public class HandleMethodArgumentNotValidException extends GlobalExceptionHandler {
 
@@ -26,7 +28,7 @@ public class HandleMethodArgumentNotValidException extends GlobalExceptionHandle
                         errorResponse.addValidationError(fieldError.getField(),
                                         fieldError.getDefaultMessage());
                 }
-
+                log.error(errorResponse.getMessage());
                 return ResponseEntity.unprocessableEntity().body(errorResponse);
         }
 

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestControllerAdvice
 public class HandlerNoSuchElementException extends GlobalExceptionHandler {
 
@@ -20,6 +22,7 @@ public class HandlerNoSuchElementException extends GlobalExceptionHandler {
             WebRequest request) {
         ExceptionResponse errorResponse = new ExceptionResponse(
                 HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());
+        log.error(errorResponse.getMessage() + " | " + ex.getLocalizedMessage());
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 

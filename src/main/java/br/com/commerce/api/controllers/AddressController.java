@@ -18,7 +18,9 @@ import br.com.commerce.api.dto.user.address.AddressRequest;
 import br.com.commerce.api.dto.user.address.AddressResponse;
 import br.com.commerce.api.services.AddressService;
 import jakarta.validation.Valid;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping(value = { "/address" })
 public class AddressController {
@@ -27,30 +29,35 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping
-    public ResponseEntity<List<AddressResponse>> findAll(){
+    public ResponseEntity<List<AddressResponse>> findAll() {
+        log.info(this.getClass().getName() + " | " + "findAll");
         return ResponseEntity.ok(addressService.findAllAddresss());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AddressResponse> findById(@PathVariable Long id){
+    public ResponseEntity<AddressResponse> findById(@PathVariable Long id) {
+        log.info(this.getClass().getName() + " | " + "findById: " + id);
         return ResponseEntity.ok(addressService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<AddressResponse> create(@RequestBody @Valid AddressRequest user){
+    public ResponseEntity<AddressResponse> create(@RequestBody @Valid AddressRequest user) {
+        log.info(this.getClass().getName() + " | " + "create: " + user.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(addressService.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressResponse> update(@PathVariable Long id, 
-            @RequestBody @Valid AddressRequest user){
+    public ResponseEntity<AddressResponse> update(@PathVariable Long id,
+            @RequestBody @Valid AddressRequest user) {
+        log.info(this.getClass().getName() + " | " + "update: " + id + user.toString());
         return ResponseEntity.status(HttpStatus.OK).body(addressService.update(user, id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable Long id){
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
         addressService.delete(id);
+        log.info(this.getClass().getName() + " | " + "delete: " + id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    
+
 }
