@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @RestControllerAdvice
-public class HandleMethodArgumentNotValidException extends GlobalExceptionHandler {
+public class HandleMethodArgumentNotValid extends GlobalExceptionHandler {
 
         @ExceptionHandler(MethodArgumentNotValidException.class)
         @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)

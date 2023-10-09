@@ -1,28 +1,28 @@
 package br.com.commerce.api.exceptions;
 
-import java.util.NoSuchElementException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@RestControllerAdvice
-public class HandlerNoSuchElementException extends GlobalExceptionHandler {
+public class HandleHttpRequestMethodNotSupported extends GlobalExceptionHandler {
 
-    @ExceptionHandler(NoSuchElementException.class)
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ExceptionResponse> handleNoSuchElementException(
-            NoSuchElementException ex,
+    public ResponseEntity<ExceptionResponse> handleHttpRequestMethodNotSupported(
+            HttpRequestMethodNotSupportedException ex,
             WebRequest request) {
         ExceptionResponse errorResponse = new ExceptionResponse(
-                HttpStatus.UNPROCESSABLE_ENTITY.value(), ex.getMessage());
-        log.error(errorResponse.getMessage() + " | " + ex.getLocalizedMessage());
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                "MethodNotSupportedException type in properties:  - "
+                        + ex.getCause().getMessage());
+
+        log.error(errorResponse.getMessage());
         return ResponseEntity.unprocessableEntity().body(errorResponse);
     }
 
