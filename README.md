@@ -44,6 +44,7 @@ Aplicação de integração usando Spring Boot
 * Spring Actuator
 * Log4J2
 * Sonar
+* Cache
 
 ## Deploy
 
