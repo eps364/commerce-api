@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.commerce.api.dto.product.ProductMapper;
@@ -12,7 +13,9 @@ import br.com.commerce.api.dto.product.ProductResponse;
 import br.com.commerce.api.models.Product;
 import br.com.commerce.api.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service
 public class ProductService {
 
@@ -22,11 +25,15 @@ public class ProductService {
     @Autowired
     ProductMapper productMapper;
 
+    @Cacheable("ProductService.findAllProducts")
     public List<ProductResponse> findAllProducts() {
+        log.info(this.getClass().getName() + " | " + "findAllProducts");
         return productMapper.toListProductResponse(productRepository.findAll());
     }
 
+    @Cacheable("ProductService.findById")
     public ProductResponse findById(Long id) {
+        log.info(this.getClass().getName() + " | " + "findById");
         return productMapper.toProductResponse(productRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Product not found id: " + id)));
     }

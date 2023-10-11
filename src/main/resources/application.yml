@@ -12,7 +12,7 @@ management:
 spring:
   profiles:
     active: dev
-
+    
 info:
   application:
     name: commerce-api

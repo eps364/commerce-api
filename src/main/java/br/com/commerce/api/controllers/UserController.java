@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,12 +33,14 @@ public class UserController {
 
 
     @GetMapping
+    @Cacheable("UserController.findAll")
     public ResponseEntity<List<UserResponse>> findAll(){
         log.info(this.getClass().getName() + " | " + "findAll");
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
     @GetMapping("/{id}")
+    @Cacheable("UserController.findById")
     public ResponseEntity<UserResponse> findById(@PathVariable UUID id){
         log.info(this.getClass().getName() + " | " + "findById: " + id);
         return ResponseEntity.ok(userService.findById(id));

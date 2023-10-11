@@ -1,5 +1,6 @@
 package br.com.commerce.api.models;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Order {
+public class Order implements Serializable{
 
     @Id
     @Column(name = "id")

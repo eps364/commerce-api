@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.commerce.api.dto.order.OrderMapper;
@@ -17,7 +18,9 @@ import br.com.commerce.api.models.OrderItem;
 import br.com.commerce.api.models.Product;
 import br.com.commerce.api.repositories.OrderItemRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service
 public class OrderItemsService {
 
@@ -72,17 +75,23 @@ public class OrderItemsService {
         return null;
     }
 
+    @Cacheable("OrderItemsService.findAllOrderItems")
     public List<OrderItemResponse> findAllOrderItems() {
+        log.info(this.getClass().getName() + " | " + "findAllOrderItems");
         return mapper.toListOrderItemResponse(orderItemsRepository.findAll());
     }
 
+    @Cacheable("OrderItemsService.findAllOrderItemsByOrderId")
     public List<OrderItemResponse> findAllOrderItemsByOrderId(Long orderId) {
+        log.info(this.getClass().getName() + " | " + "findAllOrderItemsByOrderId");
         Order order = orderMapper.toOrder(orderService.findById(orderId));
         return mapper.toListOrderItemResponse(
                 orderItemsRepository.findByOrder(order));
     }
 
+    @Cacheable("OrderItemsService.findById")
     public OrderItemResponse findById(Long id) {
+        log.info(this.getClass().getName() + " | " + "findById");
         return mapper.toOrderItemResponse(orderItemsRepository.findById(id));
     }
 
