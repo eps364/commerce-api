@@ -3,6 +3,7 @@ package br.com.commerce.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,12 +30,14 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping
+    @Cacheable("AddressController.findAll")
     public ResponseEntity<List<AddressResponse>> findAll() {
         log.info(this.getClass().getName() + " | " + "findAll");
         return ResponseEntity.ok(addressService.findAllAddresss());
     }
 
     @GetMapping("/{id}")
+    @Cacheable("AddressController.findById")
     public ResponseEntity<AddressResponse> findById(@PathVariable Long id) {
         log.info(this.getClass().getName() + " | " + "findById: " + id);
         return ResponseEntity.ok(addressService.findById(id));

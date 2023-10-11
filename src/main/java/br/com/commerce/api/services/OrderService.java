@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import br.com.commerce.api.dto.order.OrderMapper;
@@ -17,7 +18,9 @@ import br.com.commerce.api.models.OrderState;
 import br.com.commerce.api.models.User;
 import br.com.commerce.api.repositories.OrderRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service
 public class OrderService {
 
@@ -33,15 +36,21 @@ public class OrderService {
     @Autowired
     private UserMapper userMapper;
 
+    @Cacheable("OrderService.findAllOrders")
     public List<OrderResponse> findAllOrders() {
+        log.info(this.getClass().getName() + " | " + "findAllOrders");
         return orderMapper.toListOrderResponse(orderRepository.findAll());
     }
 
+    @Cacheable("OrderService.findById")
     public OrderResponse findById(Long id) {
+        log.info(this.getClass().getName() + " | " + "findById");
         return orderMapper.toOrderResponse(orderRepository.findById(id));
     }
 
+    @Cacheable("OrderService.findByUser")
     public List<OrderResponse> findByUser(String id) {
+        log.info(this.getClass().getName() + " | " + "findByUser");
         User user = userService.findByUserId(id);
         return orderMapper.toListOrderResponse(orderRepository.findByUser(user));
     }

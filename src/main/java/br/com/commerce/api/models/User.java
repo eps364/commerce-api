@@ -1,8 +1,9 @@
 package br.com.commerce.api.models;
 
-import java.util.UUID;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode
-public class User {
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
