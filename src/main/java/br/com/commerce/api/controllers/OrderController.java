@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,12 @@ public class OrderController {
     public ResponseEntity<OrderResponse> create(@RequestBody OrderRequest order) {
         log.info(this.getClass().getName() + " | " + "create: " + order.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.save(order));
+    }
+
+    @PutMapping("/complete/{id}")
+    public ResponseEntity<OrderResponse> updateState(@PathVariable Long id) {
+        log.info(this.getClass().getName() + " | " + "updateState: " + id);
+        return ResponseEntity.status(HttpStatus.OK).body(orderService.updateState(id));
     }
 
 }

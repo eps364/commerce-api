@@ -2,10 +2,12 @@ package br.com.commerce.api.services;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +65,7 @@ public class OrderService {
     @CacheEvict(CACHE_FIND_ALL)
     public OrderResponse save(OrderRequest order) {
         UserResponse userResponse = userService.findById(UUID.fromString(order.getUser()));
+        log.info(this.getClass().getName() + " | " + "save");
         if (userResponse != null) {
             User user = userMapper.toUser(userResponse);
             Order orderSave = Order.builder()
@@ -78,5 +81,17 @@ public class OrderService {
         return null;
 
     }
+
+    @CachePut(CACHE_FIND_BY_ID)
+    public OrderResponse updateState(Long id) {
+        log.info(this.getClass().getName() + " | " + "updateState");
+        Optional<Order> orderUpdate = orderRepository.findById(id);
+        if (orderUpdate.isPresent() &&
+                orderUpdate.get().getState().equals(OrderState.INCOMPLETE)) {
+            orderUpdate.get().setState(OrderState.COMPLETE);
+            return orderMapper.toOrderResponse(orderRepository.save(orderUpdate.get()));
+        }
+        return orderMapper.toOrderResponse(orderUpdate);
+     }
 
 }
