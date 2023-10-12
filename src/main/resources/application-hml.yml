@@ -1,24 +1,32 @@
+#/actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        #exclude: ""
+  info:
+    env:
+        enabled: true
+
 spring:
   datasource:
     url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
     username: ${PROD_DB_USERNAME}
     password: ${PROD_DB_PASSWORD}
     name: commerce-api
+  data:
+    redis:
+      host: ${PROD_REDIS_HOST}
+      port: ${PROD_REDIS_PORT}
+      password: ${PROD_REDIS_PASSWORD}
+      user: ${PROD_REDIS_USER}
+      time-to-live: ${PROD_REDIS_TTL}
 
-  profiles:
-    active: hml
-
+    
   sql:
     init:
       mode: always
   
   cache:
     type: redis
-    redis:
-      host: ${PROD_REDIS_HOST}
-      port: ${PROD_REDIS_PASSWORD}
-      password: ${PROD_REDIS_PORT}
-      user: ${PROD_REDIS_USER}
-      time-to-live: ${PROD_REDIS_TTL}
-  
-

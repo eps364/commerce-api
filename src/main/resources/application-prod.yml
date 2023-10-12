@@ -5,9 +5,6 @@ spring:
     password: ${PROD_DB_PASSWORD}
     name: commerce-api
 
-  profiles:
-    active: prod
-
   sql:
     init:
       mode: always
@@ -16,7 +13,7 @@ spring:
     type: redis
     redis:
       host: ${PROD_REDIS_HOST}
-      port: ${PROD_REDIS_PASSWORD}
-      password: ${PROD_REDIS_PORT}
+      port: ${PROD_REDIS_PORT}
+      password: ${PROD_REDIS_PASSWORD}
       user: ${PROD_REDIS_USER}
       time-to-live: ${PROD_REDIS_TTL}

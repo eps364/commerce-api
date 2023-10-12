@@ -24,7 +24,7 @@ Aplicação de integração usando Spring Boot
 - [X] Utilizar o spring envs (local, hml, prd)
 - [ ] Utilizar o junit para realizar testes unitários
 - [X] Utilizar o slf4j + slf4j.MDC para loggs da aplicação (infos, debugs e errors)
-- [ ] Utilizar o redis cache para cache de informações
+- [X] Utilizar o redis cache para cache de informações
 - [X] Utilizar um client HTTP REST + JSON
 - [X] Utilizar maven para build da aplicação
 - [X] Utilizar o lombok + builder
