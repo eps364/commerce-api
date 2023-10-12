@@ -5,6 +5,9 @@ spring:
     password: ${PROD_DB_PASSWORD}
     name: commerce-api
 
+  profiles:
+    active: prod
+
   sql:
     init:
       mode: always
