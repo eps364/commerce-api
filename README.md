@@ -47,6 +47,10 @@ Aplicação de integração usando Spring Boot
 * Cache
 * Redis
 
+## TODO
+
+* [ ] Tratamento de Exclusão em cascata
+
 ## Deploy
 
 [Host Production](https://commerce-api-production.up.railway.app)
