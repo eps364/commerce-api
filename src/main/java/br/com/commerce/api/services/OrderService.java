@@ -89,6 +89,7 @@ public class OrderService {
         if (orderUpdate.isPresent() &&
                 orderUpdate.get().getState().equals(OrderState.INCOMPLETE)) {
             orderUpdate.get().setState(OrderState.COMPLETE);
+            orderUpdate.get().setDateUpdate(Instant.now());
             return orderMapper.toOrderResponse(orderRepository.save(orderUpdate.get()));
         }
         return orderMapper.toOrderResponse(orderUpdate);
