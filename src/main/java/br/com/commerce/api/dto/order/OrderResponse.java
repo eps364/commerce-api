@@ -1,5 +1,6 @@
 package br.com.commerce.api.dto.order;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderResponse {
+public class OrderResponse implements Serializable {
 
     private Long id;
     private String state;

@@ -1,5 +1,7 @@
 package br.com.commerce.api.dto.user.address;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressResponse {
+public class AddressResponse implements Serializable {
     private Long id;
     private String place;
     private String zipcode;
@@ -22,5 +24,3 @@ public class AddressResponse {
     private String state;
     private String country;
 }
-
-
