@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,40 +29,36 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-
     @GetMapping
-    @Cacheable("UserController.findAll")
-    public ResponseEntity<List<UserResponse>> findAll(){
+    public ResponseEntity<List<UserResponse>> findAll() {
         log.info(this.getClass().getName() + " | " + "findAll");
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
     @GetMapping("/{id}")
-    @Cacheable("UserController.findById")
-    public ResponseEntity<UserResponse> findById(@PathVariable UUID id){
+    public ResponseEntity<UserResponse> findById(@PathVariable UUID id) {
         log.info(this.getClass().getName() + " | " + "findById: " + id);
         return ResponseEntity.ok(userService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest user){
+    public ResponseEntity<UserResponse> create(@RequestBody @Valid UserRequest user) {
         log.info(this.getClass().getName() + " | " + "create: " + user.toString());
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable UUID id, 
-            @RequestBody @Valid UserRequest user){
+    public ResponseEntity<UserResponse> update(@PathVariable UUID id,
+            @RequestBody @Valid UserRequest user) {
         log.info(this.getClass().getName() + " | " + "update: " + id + user.toString());
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(user, id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable UUID id){
+    public ResponseEntity<Object> delete(@PathVariable UUID id) {
         userService.delete(id);
         log.info(this.getClass().getName() + " | " + "delete: " + id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    
+
 }

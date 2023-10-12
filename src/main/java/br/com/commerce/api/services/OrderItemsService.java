@@ -23,6 +23,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Service
 public class OrderItemsService {
+    private static final String CACHE_FIND_ALL = "OrderItemsService.findAllOrderItems";
+    private static final String CACHE_FIND_BY_ID = "OrderItemsService.findById";
+    private static final String CACHE_FIND_BY_ORDER = "OrderItemsService.findAllOrderItemsByOrderId";
 
     @Autowired
     private OrderItemRepository orderItemsRepository;
@@ -67,7 +70,7 @@ public class OrderItemsService {
 
     @Transactional
     public OrderItemResponse updateOrderItems(OrderItemRequestPut item, Long idItem) {
-        Optional<OrderItem> orderitem =  orderItemsRepository.findById(idItem);
+        Optional<OrderItem> orderitem = orderItemsRepository.findById(idItem);
         if (orderitem.isPresent()) {
             orderitem.get().setQuantity(item.getQuantity());
             return mapper.toOrderItemResponse(orderItemsRepository.save(orderitem.get()));
@@ -75,13 +78,13 @@ public class OrderItemsService {
         return null;
     }
 
-    @Cacheable("OrderItemsService.findAllOrderItems")
+    @Cacheable(CACHE_FIND_ALL)
     public List<OrderItemResponse> findAllOrderItems() {
         log.info(this.getClass().getName() + " | " + "findAllOrderItems");
         return mapper.toListOrderItemResponse(orderItemsRepository.findAll());
     }
 
-    @Cacheable("OrderItemsService.findAllOrderItemsByOrderId")
+    @Cacheable(CACHE_FIND_BY_ORDER)
     public List<OrderItemResponse> findAllOrderItemsByOrderId(Long orderId) {
         log.info(this.getClass().getName() + " | " + "findAllOrderItemsByOrderId");
         Order order = orderMapper.toOrder(orderService.findById(orderId));
@@ -89,7 +92,7 @@ public class OrderItemsService {
                 orderItemsRepository.findByOrder(order));
     }
 
-    @Cacheable("OrderItemsService.findById")
+    @Cacheable(CACHE_FIND_BY_ID)
     public OrderItemResponse findById(Long id) {
         log.info(this.getClass().getName() + " | " + "findById");
         return mapper.toOrderItemResponse(orderItemsRepository.findById(id));

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,9 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-public class AddressService {
+public class AddressService{
+  private static final String CACHE_FIND_ALL = "AddressService.findAllAddresss";
+  private static final String CACHE_FIND_BY_ID = "AddressService.findById";
 
   @Autowired
   AddressRepository addressRepository;
@@ -34,19 +38,20 @@ public class AddressService {
   @Autowired
   UserMapper userMapper;
 
-  @Cacheable("AddressService.findAllAddresss")
+  @Cacheable(CACHE_FIND_ALL)
   public List<AddressResponse> findAllAddresss() {
     log.info(this.getClass().getName() + " | " + "findAllAddresss");
     return addressMapper.toListAddressResponse(addressRepository.findAll());
   }
 
-  @Cacheable("AddressService.findById")
+  @Cacheable(CACHE_FIND_BY_ID)
   public AddressResponse findById(Long id) {
     log.info(this.getClass().getName() + " | " + "findById");
     return addressMapper.toAddressResponse(addressRepository.findById(id));
   }
 
   @Transactional
+  @CacheEvict(CACHE_FIND_ALL)
   public AddressResponse save(AddressRequest address) {
     UserResponse userResponse = userService.findById(UUID.fromString(address.getUser()));
     if (userResponse != null) {
@@ -60,6 +65,7 @@ public class AddressService {
   }
 
   @Transactional
+  @CachePut(CACHE_FIND_BY_ID)
   public AddressResponse update(AddressRequest address, Long id) {
     Address addressUpdate = addressMapper.toAddress(address);
     if (addressRepository.findById(id).isPresent()) {
@@ -70,6 +76,7 @@ public class AddressService {
   }
 
   @Transactional
+  @CachePut(CACHE_FIND_BY_ID)
   public void delete(Long id) {
     if (addressRepository.findById(id).isPresent()) {
       addressRepository.deleteById(id);

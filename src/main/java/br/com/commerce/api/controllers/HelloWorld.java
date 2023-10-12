@@ -2,7 +2,6 @@ package br.com.commerce.api.controllers;
 
 import java.io.Serializable;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ public class HelloWorld implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @GetMapping
-    @Cacheable("hello")
     public ResponseEntity<String> hello() {
         log.info(this.getClass().getName() + " | " + "hello | OK");
         return ResponseEntity.ok().body("Hello-World");

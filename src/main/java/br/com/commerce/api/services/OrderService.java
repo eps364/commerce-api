@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Service
 public class OrderService {
+    private static final String CACHE_FIND_ALL = "OrderService.findAllOrders";
+    private static final String CACHE_FIND_BY_ID = "OrderService.findById";
+    private static final String CACHE_FIND_BY_USER = "OrderService.findByUser";
 
     @Autowired
     private OrderRepository orderRepository;
@@ -36,19 +40,19 @@ public class OrderService {
     @Autowired
     private UserMapper userMapper;
 
-    @Cacheable("OrderService.findAllOrders")
+    @Cacheable(CACHE_FIND_ALL)
     public List<OrderResponse> findAllOrders() {
         log.info(this.getClass().getName() + " | " + "findAllOrders");
         return orderMapper.toListOrderResponse(orderRepository.findAll());
     }
 
-    @Cacheable("OrderService.findById")
+    @Cacheable(CACHE_FIND_BY_ID)
     public OrderResponse findById(Long id) {
         log.info(this.getClass().getName() + " | " + "findById");
         return orderMapper.toOrderResponse(orderRepository.findById(id));
     }
 
-    @Cacheable("OrderService.findByUser")
+    @Cacheable(CACHE_FIND_BY_USER)
     public List<OrderResponse> findByUser(String id) {
         log.info(this.getClass().getName() + " | " + "findByUser");
         User user = userService.findByUserId(id);
@@ -56,6 +60,7 @@ public class OrderService {
     }
 
     @Transactional
+    @CacheEvict(CACHE_FIND_ALL)
     public OrderResponse save(OrderRequest order) {
         UserResponse userResponse = userService.findById(UUID.fromString(order.getUser()));
         if (userResponse != null) {
