@@ -20,7 +20,7 @@ Aplicação de integração usando Spring Boot
 - [X] Utilizar o spring admin para monitorar a aplicação
 - [ ] Utilizar o rabbitmq como fila de mensageria
 - [X] Utilizar o banco mysql/postgres (via HikariCP ou JPA/HIBERNATE)
-- [ ] Utilizar o spring scheduled
+- [X] Utilizar o spring scheduled
 - [X] Utilizar o spring envs (local, hml, prd)
 - [ ] Utilizar o junit para realizar testes unitários
 - [X] Utilizar o slf4j + slf4j.MDC para loggs da aplicação (infos, debugs e errors)
@@ -46,6 +46,7 @@ Aplicação de integração usando Spring Boot
 * Sonar
 * Cache
 * Redis
+* Scheduled
 
 ## TODO
 
