@@ -3,7 +3,6 @@ package br.com.commerce.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,14 +29,12 @@ public class ProductController {
 	ProductService productService;
 
 	@GetMapping
-	@Cacheable("ProductController.findAll")
 	public ResponseEntity<List<ProductResponse>> findAll() {
 		log.info(this.getClass().getName() + " | " + "findAll");
 		return ResponseEntity.ok(productService.findAllProducts());
 	}
 
 	@GetMapping("/{id}")
-	@Cacheable("ProductController.findById")
 	public ResponseEntity<ProductResponse> findById(@PathVariable Long id) {
 		ProductResponse product = productService.findById(id);
 		log.info(this.getClass().getName() + " | " + "findById: " + id);
@@ -53,7 +50,7 @@ public class ProductController {
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id,
 			@RequestBody @Valid ProductRequest product) {
-				log.info(this.getClass().getName() + " | " + "update: " + id + product.toString());
+		log.info(this.getClass().getName() + " | " + "update: " + id + product.toString());
 		return ResponseEntity.status(HttpStatus.OK).body(productService.update(product, id));
 	}
 

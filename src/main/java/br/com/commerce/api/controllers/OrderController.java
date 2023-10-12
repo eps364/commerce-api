@@ -3,7 +3,6 @@ package br.com.commerce.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,15 +26,13 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping
-    @Cacheable("OrderController.findAll")
     public ResponseEntity<List<OrderResponse>> findAll() {
         log.info(this.getClass().getName() + " | " + "findAll");
         return ResponseEntity.status(HttpStatus.OK).body(orderService.findAllOrders());
     }
 
     @GetMapping("{id}")
-    @Cacheable("OrderController.findById")
-    public ResponseEntity<OrderResponse> findById(@PathVariable Long id){
+    public ResponseEntity<OrderResponse> findById(@PathVariable Long id) {
         log.info(this.getClass().getName() + " | " + "findById: " + id);
         return ResponseEntity.status(HttpStatus.OK).body(orderService.findById(id));
     }

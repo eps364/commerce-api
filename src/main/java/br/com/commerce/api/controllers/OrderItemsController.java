@@ -3,7 +3,6 @@ package br.com.commerce.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,7 +51,6 @@ public class OrderItemsController {
     }
 
     @GetMapping("{id}")
-    @Cacheable("OrderItemsController.getById")
     public ResponseEntity<OrderItemResponse> getById(@PathVariable Long id) {
         OrderItemResponse orderItemResponse = service.findById(id);
         log.info(this.getClass().getName() + " | " + "getById: " + id);
@@ -60,14 +58,12 @@ public class OrderItemsController {
     }
 
     @GetMapping
-    @Cacheable("OrderItemsController.getAll")
     public ResponseEntity<List<OrderItemResponse>> getAll() {
         log.info(this.getClass().getName() + " | " + "getAll");
         return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrderItems());
     }
 
     @GetMapping("order/{orderId}")
-    @Cacheable("OrderItemsController.getByOrderId")
     public ResponseEntity<List<OrderItemResponse>> getByOrderId(@PathVariable Long orderId) {
         log.info(this.getClass().getName() + " | " + "getByOrderId: " + orderId);
         return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrderItemsByOrderId(orderId));

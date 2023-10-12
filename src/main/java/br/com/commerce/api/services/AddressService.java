@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-public class AddressService {
+public class AddressService{
   private static final String CACHE_FIND_ALL = "AddressService.findAllAddresss";
   private static final String CACHE_FIND_BY_ID = "AddressService.findById";
 
