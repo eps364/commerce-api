@@ -29,6 +29,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("invalidCache")
+    public ResponseEntity<List<UserResponse>> invalidCache() {
+        log.info(this.getClass().getName() + " | " + "invalidCache");
+        return ResponseEntity.ok(userService.invalidCache());
+    }
+
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll() {
         log.info(this.getClass().getName() + " | " + "findAll");
