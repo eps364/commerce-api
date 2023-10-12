@@ -9,4 +9,11 @@ spring:
     init:
       mode: always
   
-
+  cache:
+    type: redis
+    redis:
+      host: ${REDISHOST}
+      port: ${REDISPORT}
+      password: ${REDISPASSWORD}
+      # user: ${REDISUSER}
+      time-to-live: ${REDISTTL}
