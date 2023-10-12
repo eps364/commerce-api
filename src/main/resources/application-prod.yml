@@ -4,16 +4,18 @@ spring:
     username: ${PROD_DB_USERNAME}
     password: ${PROD_DB_PASSWORD}
     name: commerce-api
-
-  sql:
-    init:
-      mode: always
-  
-  cache:
-    type: redis
+  data:
     redis:
       host: ${PROD_REDIS_HOST}
       port: ${PROD_REDIS_PORT}
       password: ${PROD_REDIS_PASSWORD}
       user: ${PROD_REDIS_USER}
       time-to-live: ${PROD_REDIS_TTL}
+
+    
+  sql:
+    init:
+      mode: always
+  
+  cache:
+    type: redis
