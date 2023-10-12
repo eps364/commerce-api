@@ -30,6 +30,12 @@ public class ProductService {
     ProductMapper productMapper;
 
     @Cacheable(CACHE_FIND_ALL)
+    public List<ProductResponse> invalidCache() {
+        log.info(this.getClass().getName() + " | " + "invalidCache");
+        return productMapper.toListProductResponse(productRepository.findAll());
+    }
+
+    @Cacheable(CACHE_FIND_ALL)
     public List<ProductResponse> findAllProducts() {
         log.info(this.getClass().getName() + " | " + "findAllProducts");
         return productMapper.toListProductResponse(productRepository.findAll());

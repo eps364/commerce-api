@@ -28,6 +28,13 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 
+	@GetMapping("invalidCache")
+	public ResponseEntity<List<ProductResponse>> invalidCache() {
+		log.info(this.getClass().getName() + " | " + "invalidCache");
+		return ResponseEntity.ok(productService.invalidCache());
+	}
+
+
 	@GetMapping
 	public ResponseEntity<List<ProductResponse>> findAll() {
 		log.info(this.getClass().getName() + " | " + "findAll");

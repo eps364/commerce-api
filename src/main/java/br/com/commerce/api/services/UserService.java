@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-public class UserService  {
+public class UserService {
   private static final String CACHE_FIND_ALL = "UserService.findAllUsers";
   private static final String CACHE_FIND_BY_ID = "UserService.findById";
   private static final String CACHE_FIND_BY_USER = "UserService.findByUserId";
@@ -29,6 +29,12 @@ public class UserService  {
 
   @Autowired
   UserMapper userMapper;
+
+  @CacheEvict({ CACHE_FIND_BY_USER, CACHE_FIND_BY_ID, CACHE_FIND_ALL })
+  public List<UserResponse> invalidCache() {
+    log.info(this.getClass().getName() + " | " + "invalidCache");
+    return userMapper.toListUserResponse(userRepository.findAll());
+  }
 
   @Cacheable(CACHE_FIND_ALL)
   public List<UserResponse> findAllUsers() {
