@@ -45,6 +45,7 @@ Aplicação de integração usando Spring Boot
 * Log4J2
 * Sonar
 * Cache
+* Redis
 
 ## Deploy
 
