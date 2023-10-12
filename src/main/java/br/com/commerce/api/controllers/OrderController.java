@@ -26,6 +26,12 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @GetMapping("invalidCache")
+    public ResponseEntity<List<OrderResponse>> invalidCache() {
+        log.info(this.getClass().getName() + " | " + "invalidCache");
+        return ResponseEntity.ok(orderService.invalidCache());
+    }
+
     @GetMapping
     public ResponseEntity<List<OrderResponse>> findAll() {
         log.info(this.getClass().getName() + " | " + "findAll");

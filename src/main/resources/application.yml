@@ -20,6 +20,9 @@ spring:
       password:
       user:
       time-to-live: 500S
+  cron:
+    expression: 5 * * * * *
+    timezone: America/Sao_Paulo
     
 info:
   application:
@@ -39,3 +42,5 @@ info:
 
 logging:
   config: classpath:log4j2.yaml
+
+

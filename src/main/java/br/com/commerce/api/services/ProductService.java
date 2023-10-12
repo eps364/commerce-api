@@ -29,7 +29,7 @@ public class ProductService {
     @Autowired
     ProductMapper productMapper;
 
-    @Cacheable(CACHE_FIND_ALL)
+    @CacheEvict({CACHE_FIND_ALL,CACHE_FIND_BY_ID})
     public List<ProductResponse> invalidCache() {
         log.info(this.getClass().getName() + " | " + "invalidCache");
         return productMapper.toListProductResponse(productRepository.findAll());
