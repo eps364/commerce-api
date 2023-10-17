@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.commerce.api.dto.user.UserMapper;
@@ -29,6 +30,9 @@ public class UserService {
 
   @Autowired
   UserMapper userMapper;
+
+  @Autowired
+    private PasswordEncoder passwordEncoder;
 
   @CacheEvict({ CACHE_FIND_BY_USER, CACHE_FIND_BY_ID, CACHE_FIND_ALL })
   public List<UserResponse> invalidCache() {
@@ -64,6 +68,8 @@ public class UserService {
   @CacheEvict({ CACHE_FIND_BY_USER, CACHE_FIND_BY_ID, CACHE_FIND_ALL })
   public UserResponse save(UserRequest user2) {
     User user = userMapper.toUser(user2);
+    String encodedPassword = passwordEncoder.encode(user.getPassword());
+    user.setPassword(encodedPassword);
     return userMapper.toUserResponse(userRepository.save(user));
   }
 

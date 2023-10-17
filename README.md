@@ -16,7 +16,7 @@ Aplicação de integração usando Spring Boot
 
 ## Requisitos Técnicos:
 
-- [ ] Utilizar spring security para fazer autenticação das APIS Rest
+- [X] Utilizar spring security para fazer autenticação das APIS Rest
 - [X] Utilizar o spring admin para monitorar a aplicação
 - [ ] Utilizar o rabbitmq como fila de mensageria
 - [X] Utilizar o banco mysql/postgres (via HikariCP ou JPA/HIBERNATE)
@@ -33,6 +33,8 @@ Aplicação de integração usando Spring Boot
 
 * Spring Boot
 * Spring boot Validation
+* Spring Scurity
+* JWT
 * JPA/HIBERNATE
 * Lombok
 * ModelMapper
