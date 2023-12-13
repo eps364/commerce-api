@@ -56,10 +56,6 @@ Aplicação de integração usando Spring Boot
 
 ## Deploy
 
-[Host Production](https://commerce-api-production.up.railway.app)
-
-[Host Staging](https://commerce-api-staging.up.railway.app)
-
 - /swagger-ui/index.html
 - /api-docs
 - /actuator
