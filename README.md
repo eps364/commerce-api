@@ -62,4 +62,4 @@ Aplicação de integração usando Spring Boot
 
 ### Referencias
 
-- Hospedado em: (https://railway.app?referralCode=tPS5tO)
+- Hospedado em: 
